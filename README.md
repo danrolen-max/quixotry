@@ -1,8 +1,8 @@
-# Quixotry
+Quixotry
 
-A Rust-based quantum random number generator preserving the original FQRNG quantum profile.
+A Rust-based quantum random number generator preserving the original quantum profile.
 
-## Overview
+Overview
 
 Quixotry provides a minimal, production-oriented CLI that combines:
 
@@ -12,17 +12,15 @@ Quixotry provides a minimal, production-oriented CLI that combines:
 - NIST SP 800-22 statistical validation
 - Forward-secure entropy pool management
 
-This project is intentionally focused on preserving the quantum profile rather than forcing full classical NIST compliance.
-
-## Features
+Features
 
 - Pure Rust implementation with a small dependency set
 - CLI modes for bit, integer, and float generation
 - NIST SP 800-22 validation support
 - Forward-secure entropy pool and SHA-256-based whitening
-- Real quantum source integration via `brisbane_raw.bin`
+- Quantum source integration via `brisbane_raw.bin`
 
-## Usage
+Usage
 
 Build the project:
 
@@ -54,7 +52,7 @@ Generate a random float:
 ./target/release/quixotry --output float
 ```
 
-## Command Line Options
+Command Line Options
 
 | Option | Description | Default |
 |--------|-------------|---------|
@@ -66,12 +64,12 @@ Generate a random float:
 | `--seed <N>` | Seed entropy pool with N bits | `8192` |
 | `--entropy` | Show entropy pool status | `false` |
 
-## Test Status
+Test Status
 
 - Local `cargo test` completed successfully: **56 tests passed**.
 - The project remains aligned with the expected quantum profile.
 
-## Project Structure
+Project Structure
 
 ```text
 quixotry/
@@ -90,14 +88,13 @@ quixotry/
     └── von_neumann.rs
 ```
 
-## Build
+Build
 
 ```bash
 cargo build --release
 cargo test
 ```
 
-## Notes
+Notes
 
-- This repository is meant as a focused Rust implementation of the original FQRNG quantum RNG concept.
-- It preserves the intended quantum profile rather than applying classical noise correction.
+
