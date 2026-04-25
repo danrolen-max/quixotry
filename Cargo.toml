@@ -1,0 +1,32 @@
+[package]
+name = "quixotry"
+version = "0.1.0"
+edition = "2021"
+authors = ["Frankenstein Quixotry RNG"]
+description = "A clean Rust CLI tool that preserves the original FQRNG quantum profile functionality"
+
+[dependencies]
+# Random number generation
+rand = "0.8"
+getrandom = "0.2"
+
+# Cryptographic primitives
+sha2 = "0.10"
+hmac = "0.12"
+digest = "0.10"
+
+# Complex numbers for quantum state representation
+num-complex = "0.4"
+
+# CLI interface
+clap = { version = "4.4", features = ["derive"] }
+
+# Error handling
+thiserror = "1.0"
+
+# For array operations and matrix math
+ndarray = "0.15"
+
+[dev-dependencies]
+# Benchmarking
+criterion = "0.5"
