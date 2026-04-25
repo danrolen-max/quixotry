@@ -815,21 +815,18 @@ fn normal_cdf(x: f64) -> f64 {
 
 /// Error function using polynomial approximation
 fn erf(x: f64) -> f64 {
-    let t = 1.0 / (1.0 + 0.3275911 * x.abs());
+    let sign = if x < 0.0 { -1.0 } else { 1.0 };
+    let x = x.abs();
+    let t = 1.0 / (1.0 + 0.3275911 * x);
     let y = 1.0
-        - (((((1.1137268587 * t - 1.0585388059) * t - 0.003869760) * t + 0.002778) * t
-            + 0.000190528)
+        - (((((1.061405429 * t + -1.453152027) * t + 1.421413741) * t
+            + -0.284496736)
             * t
-            + 0.000952811)
-            * t
-            * x.abs()
-            * (-x * x - 1.26551223).exp();
+            + 0.254829592)
+            * t)
+            * (-x * x).exp();
 
-    if x >= 0.0 {
-        1.0 - y
-    } else {
-        y - 1.0
-    }
+    sign * y
 }
 
 /// Cumulative distribution function for cumulative sums test
@@ -1077,10 +1074,10 @@ mod tests {
         let rank = compute_matrix_rank(&matrix, 3);
         assert_eq!(rank, 3);
 
-        // Singular matrix
+        // Singular matrix with one independent row
         let singular = vec![vec![1u8, 1, 1], vec![1, 1, 1], vec![0, 0, 0]];
         let rank = compute_matrix_rank(&singular, 3);
-        assert_eq!(rank, 2);
+        assert_eq!(rank, 1);
     }
 
     #[test]

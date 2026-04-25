@@ -235,13 +235,13 @@ mod tests {
         let mut pool = EntropyPool::new(1024);
         assert!(pool.needs_replenishment());
 
-        // Fill to 30% - still needs replenishment (below 25%)
-        pool.replenish(&vec![1u8; 300]);
+        // Fill to 20% - still needs replenishment
+        pool.replenish(&vec![1u8; 200]);
         assert!(pool.needs_replenishment());
 
-        // Fill to 30% - still needs replenishment (below 25%)
-        pool.replenish(&vec![1u8; 300]);
-        assert!(pool.needs_replenishment());
+        // Fill to 30% - now above the 25% threshold
+        pool.replenish(&vec![1u8; 100]);
+        assert!(!pool.needs_replenishment());
     }
 
     #[test]

@@ -237,7 +237,7 @@ mod tests {
 
     #[test]
     fn test_estimate_entropy_mostly_ones() {
-        let bits = vec![1, 1, 1, 1, 1, 1, 1, 0];
+        let bits = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0];
         let entropy = estimate_entropy(&bits);
         // High imbalance should give low entropy
         assert!(entropy < 0.5);

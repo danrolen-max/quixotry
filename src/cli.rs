@@ -40,7 +40,7 @@ impl CLI {
     /// Create a new CLI instance.
     pub fn new() -> Self {
         CLI {
-            ghz: GHZState::new("brisbane_raw.bin"),
+            ghz: GHZState::new("brisbane_raw.bin", 14),
             beam_splitter: BeamSplitter::new(),
             entropy_pool: EntropyPool::new(1024),
             nist: NISTValidator::new(),

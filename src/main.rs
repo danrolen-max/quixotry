@@ -15,17 +15,13 @@ mod nist_validator;
 mod von_neumann;
 
 use beam_splitter::BeamSplitter;
-use cli::{build_cli, format_results_tree, OutputType, CLI};
+use cli::{build_cli, format_results_tree, OutputType};
 use entropy::EntropyPool;
 use ghz_state::GHZState;
 use nist_validator::NISTValidator;
 use sha2::{Digest, Sha256};
 use von_neumann::von_neumann_extractor;
-
-use std::fs::File;
 use std::io::Write;
-use std::process::{Command, Stdio};
-
 use std::process::exit;
 
 /// Quantum RNG configuration
@@ -36,9 +32,9 @@ pub struct QuantumRNG {
 }
 
 impl QuantumRNG {
-    pub fn new(_n_qubits: usize) -> Self {
+    pub fn new(n_qubits: usize) -> Self {
         QuantumRNG {
-            ghz: GHZState::new("brisbane_raw.bin"),
+            ghz: GHZState::new("brisbane_raw.bin", n_qubits),
             beam_splitter: BeamSplitter::new(),
             entropy_pool: EntropyPool::new(8192), // 8KB entropy pool
         }

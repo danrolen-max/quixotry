@@ -5,11 +5,12 @@ use std::path::Path;
 pub struct GHZState {
     real_data: Vec<u8>,
     pointer: usize,
+    n_qubits: usize,
 }
 
 impl GHZState {
-    /// Initializes the GHZ state exclusively using real IBM Brisbane hardware data
-    pub fn new<P: AsRef<Path>>(data_path: P) -> Self {
+    /// Initializes the GHZ state exclusively using real IBM Brisbane hardware data.
+    pub fn new<P: AsRef<Path>>(data_path: P, n_qubits: usize) -> Self {
         let mut file = File::open(data_path)
             .expect("CRITICAL: Could not find brisbane_raw.bin. Real quantum data is required.");
 
@@ -20,7 +21,13 @@ impl GHZState {
         GHZState {
             real_data,
             pointer: 0,
+            n_qubits,
         }
+    }
+
+    /// Returns the configured number of GHZ qubits.
+    pub fn n_qubits(&self) -> usize {
+        self.n_qubits
     }
 
     /// Measures bits directly from the IBM hardware payload
